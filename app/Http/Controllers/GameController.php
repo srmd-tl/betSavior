@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Game;
+use App\Sport;
 use App\Services\TheOddsApiSercice;
 use Illuminate\Http\Request;
 
@@ -18,10 +19,18 @@ class GameController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $odds=$this->oddsService->odds();
-        return view('game');
+        $odds    = $this->oddsService->odds($request->sport??"basketball_nba");
+        $matches = [];
+        if ($odds->json()) {
+            $matches = collect($odds->json()["data"]);
+            $match   = ($matches[0]);
+            // dd($matches);
+
+        }
+
+        return view('game', ["matches" => $matches,"sports"=>Sport::all(),"match" => $match]);
     }
 
     /**
@@ -48,12 +57,19 @@ class GameController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Game  $game
+     * @param   $game
      * @return \Illuminate\Http\Response
      */
-    public function show(Game $game)
+    public function show(Request $request, $game)
     {
-        //
+        $odds  = $this->oddsService->odds($request->sport);
+        $match = [];
+        if ($odds->json()) {
+            $matches = collect($odds->json()["data"]);
+            $match   = ($matches[$game]);
+
+        }
+        return view('game', ["matches" => $matches, "match" => $match,"sports"=>Sport::all()]);
     }
 
     /**

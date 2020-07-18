@@ -45,12 +45,13 @@
 					<tr>
 					<th><span style="font-weight:400;color:#6d6d6d;">< LALIGA</span></th>
 						<th colspan="9">
-							<select class="form-control" id="exampleFormControlSelect1" style="font-size: 0.7rem;width: 40%;float:left;">
+							<select class="form-control" id="sports" style="font-size: 0.7rem;width: 40%;float:left;">
 								<option>Choose a different game</option>
-								<option>NFL</option>
-								<option>NBA</option>
-								<option>MLB</option>
-								<option>NHL</option>
+								@forelse($sports as $sport)
+								<option value="{{ $sport->sport_key}}" >{{ $sport->sport_nice}}</option>
+								@empty
+								@endforelse
+								
 							</select>					
 							<button type="button" class="btn btn-primary" style="float:right;">FILTER BY: ALL STATES <i style="color: #ffba00;" class="fas fa-angle-double-right"></i></button>
 						</th>
@@ -79,45 +80,30 @@
 					</tr>
 				</thead>
 				<tbody>
+
 					<tr STYLE="BACKGROUND:#F8F8F8;">
-						<td style="width:15%;background:#ffffff;border-right:0px solid #ffffff;"><H6>FC Barcelona</H6></td>
+
+						<td style="width:15%;background:#ffffff;border-right:0px solid #ffffff;"><H6>{{$match["teams"][0]}}</H6></td>
 						<td style="background:#ffffff;border-left:0px solid #ffffff;"><a style="color:#212529;" href="#">-334</a> <img src="img/chart.png" width="20" style="margin-left:10px;"> </td>
-						<td style="text-align:center;font-weight:bold;color:#004ad6;"><a style="color:#004ad6;" href="#">-430</a></td>
-						<td style="text-align:center;font-weight:bold;color:#ffba00;background:#ffffff;"><a style="color:#ffba00;" href="#">-400</a></td>
-						<td style="text-align:center;font-weight:bold;color:#ffba00;background:#ffffff;"><a style="color:#ffba00;" href="#">-400</a></td>
-						<td style="text-align:center;font-weight:bold;color:#ffba00;background:#ffffff;"><img src="img/down.png" width="20" style="margin-left:10px;"> <a style="color:#ffba00;" href="#">-400</a></td>
-						<td style="text-align:center;font-weight:bold;color:#004ad6;"><img src="img/down.png" width="20" style="margin-left:10px;"> <a style="color:#004ad6;" href="#">-420</a></td>
-						<td style="text-align:center;font-weight:bold;color:#004ad6;"><img src="img/down.png" width="20" style="margin-left:10px;"> <a style="color:#004ad6;" href="#">-420</a></td>
-						<td style="text-align:center;font-weight:bold;color:#004ad6;"><img src="img/down.png" width="20" style="margin-left:10px;"> <a style="color:#004ad6;" href="#">-420</a></td>
-						<td style="text-align:center;font-weight:bold;color:#004ad6;"><img src="img/down.png" width="20" style="margin-left:10px;"> <a style="color:#004ad6;" href="#">-420</a></td>
+						@forelse($match["sites"] as $league)
+						<td style="text-align:center;font-weight:bold;color:#004ad6;"><a style="color:#004ad6;" href="#">{{$league["odds"]["h2h"][0]}}</a></td>
+						@empty
+						@endforelse
+						
 					</tr>
-					<tr STYLE="BACKGROUND:#F8F8F8; ">
-						<td style="width:15%;background:#ffffff;border-right:0px solid #ffffff;"><H6>Draw</H6></td>
-						<td style="background:#ffffff;border-left:0px solid #ffffff;width:400px;"><a style="color:#212529;" href="#">+477</a> <img src="img/chart.png" width="20" style="margin-left:10px;"> </td>
-						<td style="text-align:center;font-weight:bold;color:#004ad6;"><a style="color:#004ad6;" href="#">-430</a></td>
-						<td style="text-align:center;font-weight:bold;color:#ffba00;background:#ffffff;"><a style="color:#ffba00;" href="#">-400</a></td>
-						<td style="text-align:center;font-weight:bold;color:#ffba00;background:#ffffff;"><a style="color:#ffba00;" href="#">-400</a></td>
-						<td style="text-align:center;font-weight:bold;color:#ffba00;background:#ffffff;"><img src="img/down.png" width="20" style="margin-left:10px;"> <a style="color:#ffba00;" href="#">-400</a></td>
-						<td style="text-align:center;font-weight:bold;color:#004ad6;"><img src="img/down.png" width="20" style="margin-left:10px;"> <a style="color:#004ad6;" href="#">-420</a></td>
-						<td style="text-align:center;font-weight:bold;color:#004ad6;"><img src="img/down.png" width="20" style="margin-left:10px;"> <a style="color:#004ad6;" href="#">-420</a></td>
-						<td style="text-align:center;font-weight:bold;color:#004ad6;"><img src="img/down.png" width="20" style="margin-left:10px;"> <a style="color:#004ad6;" href="#">-420</a></td>
-						<td style="text-align:center;font-weight:bold;color:#004ad6;"><img src="img/down.png" width="20" style="margin-left:10px;"> <a style="color:#004ad6;" href="#">-420</a></td>
+
+					<tr STYLE="BACKGROUND:#F8F8F8;">
+
+						<td style="width:15%;background:#ffffff;border-right:0px solid #ffffff;"><H6>{{$match["teams"][1]}}</H6></td>
+						<td style="background:#ffffff;border-left:0px solid #ffffff;"><a style="color:#212529;" href="#">-334</a> <img src="img/chart.png" width="20" style="margin-left:10px;"> </td>
+						@forelse($match["sites"] as $league)
+						<td style="text-align:center;font-weight:bold;color:#004ad6;"><a style="color:#004ad6;" href="#">{{$league["odds"]["h2h"][1]}}</a></td>
+						@empty
+						@endforelse
+						
 					</tr>
-					<tr STYLE="BACKGROUND:#F8F8F8; ">
-						<td style="width:15%;background:#ffffff;border-right:0px solid #ffffff;"><H6>RCD Mallorca</H6></td>
-						<td style="background:#ffffff;border-left:0px solid #ffffff;width:400px;"><a style="color:#212529;" href="#">+480</a> <img src="img/chart.png" width="20" style="margin-left:10px;"> </td>
-						<td style="text-align:center;font-weight:bold;color:#004ad6;"><a style="color:#004ad6;" href="#">-430</a></td>
-						<td style="text-align:center;font-weight:bold;color:#ffba00;background:#ffffff;"><a style="color:#ffba00;" href="#">-400</a></td>
-						<td style="text-align:center;font-weight:bold;color:#ffba00;background:#ffffff;"><a style="color:#ffba00;" href="#">-400</a></td>
-						<td style="text-align:center;font-weight:bold;color:#ffba00;background:#ffffff;"><img src="img/down.png" width="20" style="margin-left:10px;"> <a style="color:#ffba00;" href="#">-400</a></td>
-						<td style="text-align:center;font-weight:bold;color:#004ad6;"><img src="img/down.png" width="20" style="margin-left:10px;"> <a style="color:#004ad6;" href="#">-420</a></td>
-						<td style="text-align:center;font-weight:bold;color:#004ad6;"><img src="img/down.png" width="20" style="margin-left:10px;"> <a style="color:#004ad6;" href="#">-420</a></td>
-						<td style="text-align:center;font-weight:bold;color:#004ad6;"><img src="img/down.png" width="20" style="margin-left:10px;"> <a style="color:#004ad6;" href="#">-420</a></td>
-						<td style="text-align:center;font-weight:bold;color:#004ad6;"><img src="img/down.png" width="20" style="margin-left:10px;"> <a style="color:#004ad6;" href="#">-420</a></td>
-					</tr>
-					<tr>
-						<td colspan="10" style="text-align:center;"><a href="#">&#xfe40; 68% of bets and 90% money for Barcelona. See More</a></td>
-					</tr>
+				
+				
 				</tbody>
 			</table>
 		</div>
@@ -128,3 +114,16 @@
 </div>
 </div>
 @endsection
+@push('js')
+<script type="text/javascript">
+	$(function(){
+		$("#sports").change(function(){
+			alert('here')
+			var url = "{{route('game.index',':slug')}}"
+			url = url.replace(':slug','sport='+$(this).val())
+			 window.location = url; 
+			
+		})
+	})
+</script>
+@endpush

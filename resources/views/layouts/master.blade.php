@@ -96,182 +96,36 @@
 								<!-- games -->
 								<div class="MultiCarousel" data-items="1,4,5,5" data-slide="1" id="MultiCarousel"  data-interval="1000">
 									<div class="MultiCarousel-inner">
+										@forelse($matches as $key=> $match)
 										<div class="item" style="width:170px !important;">
 											<div class="pad15">
 												<table>
 													<tr>
 														<td><img src="img/team1.png" align="left" style="width:30px;"></td>
-														<td style="font-size:11px;"><strong>CLE &nbsp;</strong></td>
+														<td style="font-size:11px;"><strong>{{$match["teams"][0]}} &nbsp;</strong></td>
 														<td style="font-size:11px;">19-46</td>
 													</tr>
 													<tr>	
 														<td>&nbsp;&nbsp;&nbsp; <img src="img/team2.png" align="left" style="width:30px;"></td>
-														<td style="font-size:11px;"><strong>ATL &nbsp;</strong></td>
+														<td style="font-size:11px;"><strong>{{$match["teams"][1]}}  &nbsp;</strong></td>
 														<td style="font-size:11px;">20-47</td>
 													</tr>
 													<tr>		
-														<td colspan="3">&nbsp;&nbsp;&nbsp;<span style="font-size:10px;">Thurs, 4:30am PT   FS-SE</span></td>
+														<td colspan="3">&nbsp;&nbsp;&nbsp;<span style="font-size:10px;">{{
+
+															\Carbon\Carbon::parse(\Carbon\Carbon::createFromTimestamp($match["commence_time"])->toDateTimeString(), 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')
+
+															}}</span></td>
 													</tr>
 													<tr>		
-														<td colspan="3">&nbsp;<button type="button" class="btn btn-void" style="color:#004bd1;font-size:11px;">Go to Game >></button></td>
+														<td colspan="3">&nbsp;<a href="{{route('game.show',[$key,'sport'=>$match['sport_key'] ])}}" class="btn btn-void" style="color:#004bd1;font-size:11px;">Go to Game >></a></td>
 													</tr>
 												</table>
 											</div>
 										</div>
-										<div class="item" style="width:170px !important;">
-											<div class="pad15">
-												<table>
-													<tr>
-														<td><img src="img/team1.png" align="left" style="width:30px;"></td>
-														<td style="font-size:11px;"><strong>CLE &nbsp;</strong></td>
-														<td style="font-size:11px;">19-46</td>
-													</tr>
-													<tr>	
-														<td>&nbsp;&nbsp;&nbsp; <img src="img/team2.png" align="left" style="width:30px;"></td>
-														<td style="font-size:11px;"><strong>ATL &nbsp;</strong></td>
-														<td style="font-size:11px;">20-47</td>
-													</tr>
-													<tr>		
-														<td colspan="3">&nbsp;&nbsp;&nbsp;<span style="font-size:10px;">Thurs, 4:30am PT   FS-SE</span></td>
-													</tr>
-													<tr>		
-														<td colspan="3">&nbsp;<button type="button" class="btn btn-void" style="color:#004bd1;font-size:11px;">Go to Game >></button></td>
-													</tr>
-												</table>
-											</div>
-										</div>
-										<div class="item" style="width:170px !important;">
-											<div class="pad15">
-												<table>
-													<tr>
-														<td><img src="img/team1.png" align="left" style="width:30px;"></td>
-														<td style="font-size:11px;"><strong>CLE &nbsp;</strong></td>
-														<td style="font-size:11px;">19-46</td>
-													</tr>
-													<tr>	
-														<td>&nbsp;&nbsp;&nbsp; <img src="img/team2.png" align="left" style="width:30px;"></td>
-														<td style="font-size:11px;"><strong>ATL &nbsp;</strong></td>
-														<td style="font-size:11px;">20-47</td>
-													</tr>
-													<tr>		
-														<td colspan="3">&nbsp;&nbsp;&nbsp;<span style="font-size:10px;">Thurs, 4:30am PT   FS-SE</span></td>
-													</tr>
-													<tr>		
-														<td colspan="3">&nbsp;<button type="button" class="btn btn-void" style="color:#004bd1;font-size:11px;">Go to Game >></button></td>
-													</tr>
-												</table>
-											</div>
-										</div>
-										<div class="item" style="width:170px !important;">
-											<div class="pad15">
-												<table>
-													<tr>
-														<td><img src="img/team1.png" align="left" style="width:30px;"></td>
-														<td style="font-size:11px;"><strong>CLE &nbsp;</strong></td>
-														<td style="font-size:11px;">19-46</td>
-													</tr>
-													<tr>	
-														<td>&nbsp;&nbsp;&nbsp; <img src="img/team2.png" align="left" style="width:30px;"></td>
-														<td style="font-size:11px;"><strong>ATL &nbsp;</strong></td>
-														<td style="font-size:11px;">20-47</td>
-													</tr>
-													<tr>		
-														<td colspan="3">&nbsp;&nbsp;&nbsp;<span style="font-size:10px;">Thurs, 4:30am PT   FS-SE</span></td>
-													</tr>
-													<tr>		
-														<td colspan="3">&nbsp;<button type="button" class="btn btn-void" style="color:#004bd1;font-size:11px;">Go to Game >></button></td>
-													</tr>
-												</table>
-											</div>
-										</div>
-										<div class="item" style="width:170px !important;">
-											<div class="pad15">
-												<table>
-													<tr>
-														<td><img src="img/team1.png" align="left" style="width:30px;"></td>
-														<td style="font-size:11px;"><strong>CLE &nbsp;</strong></td>
-														<td style="font-size:11px;">19-46</td>
-													</tr>
-													<tr>	
-														<td>&nbsp;&nbsp;&nbsp; <img src="img/team2.png" align="left" style="width:30px;"></td>
-														<td style="font-size:11px;"><strong>ATL &nbsp;</strong></td>
-														<td style="font-size:11px;">20-47</td>
-													</tr>
-													<tr>		
-														<td colspan="3">&nbsp;&nbsp;&nbsp;<span style="font-size:10px;">Thurs, 4:30am PT   FS-SE</span></td>
-													</tr>
-													<tr>		
-														<td colspan="3">&nbsp;<button type="button" class="btn btn-void" style="color:#004bd1;font-size:11px;">Go to Game >></button></td>
-													</tr>
-												</table>
-											</div>
-										</div>
-										<div class="item" style="width:170px !important;">
-											<div class="pad15">
-												<table>
-													<tr>
-														<td><img src="img/team1.png" align="left" style="width:30px;"></td>
-														<td style="font-size:11px;"><strong>CLE &nbsp;</strong></td>
-														<td style="font-size:11px;">19-46</td>
-													</tr>
-													<tr>	
-														<td>&nbsp;&nbsp;&nbsp; <img src="img/team2.png" align="left" style="width:30px;"></td>
-														<td style="font-size:11px;"><strong>ATL &nbsp;</strong></td>
-														<td style="font-size:11px;">20-47</td>
-													</tr>
-													<tr>		
-														<td colspan="3">&nbsp;&nbsp;&nbsp;<span style="font-size:10px;">Thurs, 4:30am PT   FS-SE</span></td>
-													</tr>
-													<tr>		
-														<td colspan="3">&nbsp;<button type="button" class="btn btn-void" style="color:#004bd1;font-size:11px;">Go to Game >></button></td>
-													</tr>
-												</table>
-											</div>
-										</div>
-										<div class="item" style="width:170px !important;">
-											<div class="pad15">
-												<table>
-													<tr>
-														<td><img src="img/team1.png" align="left" style="width:30px;"></td>
-														<td style="font-size:11px;"><strong>CLE &nbsp;</strong></td>
-														<td style="font-size:11px;">19-46</td>
-													</tr>
-													<tr>	
-														<td>&nbsp;&nbsp;&nbsp; <img src="img/team2.png" align="left" style="width:30px;"></td>
-														<td style="font-size:11px;"><strong>ATL &nbsp;</strong></td>
-														<td style="font-size:11px;">20-47</td>
-													</tr>
-													<tr>		
-														<td colspan="3">&nbsp;&nbsp;&nbsp;<span style="font-size:10px;">Thurs, 4:30am PT   FS-SE</span></td>
-													</tr>
-													<tr>		
-														<td colspan="3">&nbsp;<button type="button" class="btn btn-void" style="color:#004bd1;font-size:11px;">Go to Game >></button></td>
-													</tr>
-												</table>
-											</div>
-										</div>
-										<div class="item" style="width:170px !important;">
-											<div class="pad15">
-												<table>
-													<tr>
-														<td><img src="img/team1.png" align="left" style="width:30px;"></td>
-														<td style="font-size:11px;"><strong>CLE &nbsp;</strong></td>
-														<td style="font-size:11px;">19-46</td>
-													</tr>
-													<tr>	
-														<td>&nbsp;&nbsp;&nbsp; <img src="img/team2.png" align="left" style="width:30px;"></td>
-														<td style="font-size:11px;"><strong>ATL &nbsp;</strong></td>
-														<td style="font-size:11px;">20-47</td>
-													</tr>
-													<tr>		
-														<td colspan="3">&nbsp;&nbsp;&nbsp;<span style="font-size:10px;">Thurs, 4:30am PT   FS-SE</span></td>
-													</tr>
-													<tr>		
-														<td colspan="3">&nbsp;<button type="button" class="btn btn-void" style="color:#004bd1;font-size:11px;">Go to Game >></button></td>
-													</tr>
-												</table>
-											</div>
-										</div>
+										@empty
+										@endforelse
+									
 									</div>
 									<button class="btn btn-primary leftLst"><</button>
 									<button class="btn btn-primary rightLst">></button>
@@ -631,5 +485,6 @@ function myFunction() {
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    @stack('js')
   </body>
 </html>

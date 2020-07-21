@@ -13,20 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
+Auth::routes();
 Route::resource('game', 'GameController');
-Route::get('test', function () {
-    return view('game');
-});
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'UserController', ['except' => ['show']]);

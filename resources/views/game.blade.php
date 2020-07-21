@@ -45,7 +45,7 @@
 					<tr>
 					<th><span style="font-weight:400;color:#6d6d6d;">< LALIGA</span></th>
 						<th colspan="9">
-							<select class="form-control" id="sports" style="font-size: 0.7rem;width: 40%;float:left;">
+							<select class="form-control sports"  style="font-size: 0.7rem;width: 40%;float:left;">
 								<option>Choose a different game</option>
 								@forelse($sports as $sport)
 								<option value="{{ $sport->sport_key}}" >{{ $sport->sport_nice}}</option>
@@ -114,16 +114,4 @@
 </div>
 </div>
 @endsection
-@push('js')
-<script type="text/javascript">
-	$(function(){
-		$("#sports").change(function(){
-			alert('here')
-			var url = "{{route('game.index',':slug')}}"
-			url = url.replace(':slug','sport='+$(this).val())
-			 window.location = url; 
-			
-		})
-	})
-</script>
-@endpush
+

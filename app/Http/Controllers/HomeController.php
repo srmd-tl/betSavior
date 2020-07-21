@@ -2,18 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\NewsApiService;
+use App\Services\TheOddsApiSercice;
 use Illuminate\Support\Facades\Http;
-
+use App\Sport;
 class HomeController extends Controller
 {
+    protected $newsApi;
+    protected $oddsService;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(NewsApiService $newsApi, TheOddsApiSercice $oddsService)
     {
         $this->middleware('auth');
+        $this->newsApi     = $newsApi;
+        $this->oddsService = $oddsService;
     }
 
     /**
@@ -23,7 +29,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $news    = [];
+        $odds    = $this->oddsService->odds($request->sport ?? "basketball_nba");
+        $matches = [];
+        if ($odds->json()) {
+            $matches = collect($odds->json()["data"]);
+            $match   = ($matches[0]);
+            // dd($matches);
+
+        }
+
+        $data = ($this->newsApi->news());
+        if ($data["totalResults"] > 0) {
+            $news = $data["articles"];
+        }
+        return view('index', ["news" => $news, "matches" => $matches, "sports" => Sport::all(), "match" => $match]);
     }
     public function fetchOdds()
     {

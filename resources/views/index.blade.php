@@ -36,11 +36,11 @@
 													<div class="position-relative">
 														<!--thumbnail img-->
 														<div class="ratio_left-cover-1 image-wrapper">
-															<a href="{{$new['url']}}"><img class="img-fluid w-100" src="{{$new['urlToImage']}}" alt="The News"></a>
+															<a href="{{$new['url']}}" target="_blank"><img class="img-fluid w-100" src="{{$new['urlToImage']}}" alt="The News"></a>
 														</div>
 														<div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
 															<!--title-->
-															<a href="{{$new['url']}}">
+															<a href="{{$new['url']}}" target="_blank">
 																<h2 class="h3 post-title text-white my-1">{{$new['title']}}</h2>
 															</a>
 															<!-- meta title -->
@@ -81,19 +81,19 @@
 											<div class="position-relative">
 												<!--thumbnail img-->
 												<div class="ratio_right-cover-2 image-wrapper">
-													<a href="#">
+													<a href="{{$news[16]['url']}}" target="_blank">
 														<img class="img-fluid"
-															src="https://bootstrap.news/source/img5.jpg"
+															src="{{$news[16]['urlToImage']}}"
 															alt="simple blog template bootstrap">
 													</a>
 												</div>
 												<div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
 													<!-- category -->
-													<a class="p-1 badge badge-primary rounded-0" href="#">Lifestyle</a>
+													<!-- <a class="p-1 badge badge-primary rounded-0" href="#">Lifestyle</a> -->
 
 													<!--title-->
-													<a href="#">
-														<h2 class="h5 text-white my-1">Should you see the Fantastic Beasts sequel?</h2>
+													<a href="{{$news[16]['url']}}" target="_blank">
+														<h2 class="h5 text-white my-1">{{$news[16]['title']}}</h2>
 													</a>
 												</div>
 											</div>
@@ -106,18 +106,18 @@
 											<div class="position-relative">
 												<!--thumbnail img-->
 												<div class="ratio_right-cover-2 image-wrapper">
-													<a href="#">
+													<a href="{{$news[17]['url']}}" target="_blank">
 														<img class="img-fluid"
-															src="https://bootstrap.news/source/img6.jpg"
+															src="{{$news[17]['urlToImage']}}"
 															alt="bootstrap templates for blog">
 													</a>
 												</div>
 												<div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
 													<!-- category -->
-													<a class="p-1 badge badge-primary rounded-0" href="#">Motocross</a>
+													<!-- <a class="p-1 badge badge-primary rounded-0" href="#">Motocross</a> -->
 													<!--title-->
-													<a href="#">
-														<h2 class="h5 text-white my-1">Three myths about Florida elections recount</h2>
+													<a href="{{$news[17]['url']}}" target="_blank">
+														<h2 class="h5 text-white my-1">{{$news[17]['title']}}</h2>
 													</a>
 												</div>
 											</div>
@@ -130,18 +130,18 @@
 											<div class="position-relative">
 												<!--thumbnail img-->
 												<div class="ratio_right-cover-2 image-wrapper">
-													<a href="#">
+													<a href="{{$news[18]['url']}}" target="_blanlk"> 
 														<img class="img-fluid"
-															src="https://bootstrap.news/source/img7.jpg"
+															src="{{$news[18]['urlToImage']}}"
 															alt="bootstrap blog wordpress theme">
 													</a>
 												</div>
 												<div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
 													<!-- category -->
-													<a class="p-1 badge badge-primary rounded-0" href="#">Fitness</a>
+													<!-- <a class="p-1 badge badge-primary rounded-0" href="#">Fitness</a> -->
 													<!--title-->
-													<a href="#">
-														<h2 class="h5 text-white my-1">Finding Empowerment in Two Wheels and a Helmet</h2>
+													<a href="{{$news[18]['url']}}" target="_blank">
+														<h2 class="h5 text-white my-1">{{$news[18]['title']}}</h2>
 													</a>
 												</div>
 											</div>
@@ -154,18 +154,18 @@
 											<div class="position-relative">
 												<!--thumbnail img-->
 												<div class="ratio_right-cover-2 image-wrapper">
-													<a href="#">
+													<a href="{{$news[19]['url']}}" target="_blank">
 														<img class="img-fluid"
-															src="https://bootstrap.news/source/img8.jpg"
+															src="{{$news[19]['urlToImage']}}"
 															alt="blog website templates bootstrap">
 													</a>
 												</div>
 												<div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
 													<!-- category -->
-													<a class="p-1 badge badge-primary rounded-0" href="#">Adventure</a>
+													<!-- <a class="p-1 badge badge-primary rounded-0" href="#">Adventure</a> -->
 													<!--title-->
-													<a href="#">
-														<h2 class="h5 text-white my-1">Ditch receipts and four other tips to be a shopper</h2>
+													<a href="{{$news[19]['url']}}" target="_blank">
+														<h2 class="h5 text-white my-1">{{$news[19]['title']}}</h2>
 													</a>
 												</div>
 											</div>

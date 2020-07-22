@@ -86,7 +86,28 @@
 						<td style="width:15%;background:#ffffff;border-right:0px solid #ffffff;"><H6>{{$match["teams"][0]}}</H6></td>
 						<td style="background:#ffffff;border-left:0px solid #ffffff;"><a style="color:#212529;" href="#">-334</a> <img src="img/chart.png" width="20" style="margin-left:10px;"> </td>
 						@forelse($match["sites"] as $league)
-						<td style="text-align:center;font-weight:bold;color:#004ad6;"><a style="color:#004ad6;" href="#">{{$league["odds"]["h2h"][0]}}</a></td>
+						<td style="text-align:center;font-weight:bold;color:#004ad6;"><a style="color:#004ad6;" href="#">
+							@php
+								$teamAOdd=0;
+
+								$teamBOdd=0;
+								if($league["odds"]["h2h"][0]>$league["odds"]["h2h"][1])
+								{
+									$teamAOdd=($league["odds"]["h2h"][0]-1)*100;
+
+									$teamBOdd=100/(1-$league["odds"]["h2h"][1]);
+								}	
+								else
+								{
+									$teamBOdd=($league["odds"]["h2h"][1]-1)*100;
+
+								$teamAOdd=100/(1-$league["odds"]["h2h"][0]);
+								}
+							@endphp
+							{{$teamAOdd}}
+
+
+					</a></td>
 						@empty
 						@endforelse
 						
@@ -97,7 +118,7 @@
 						<td style="width:15%;background:#ffffff;border-right:0px solid #ffffff;"><H6>{{$match["teams"][1]}}</H6></td>
 						<td style="background:#ffffff;border-left:0px solid #ffffff;"><a style="color:#212529;" href="#">-334</a> <img src="img/chart.png" width="20" style="margin-left:10px;"> </td>
 						@forelse($match["sites"] as $league)
-						<td style="text-align:center;font-weight:bold;color:#004ad6;"><a style="color:#004ad6;" href="#">{{$league["odds"]["h2h"][1]}}</a></td>
+						<td style="text-align:center;font-weight:bold;color:#004ad6;"><a style="color:#004ad6;" href="#">{{$teamBOdd}}</a></td>
 						@empty
 						@endforelse
 						

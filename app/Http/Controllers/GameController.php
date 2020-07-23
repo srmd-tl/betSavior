@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Casino;
 use App\Game;
+use App\Services\TeamApiService;
 use App\Services\TheOddsApiSercice;
 use App\Sport;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
 {
+    protected $teamApi;
     protected $oddsService;
-    public function __construct(TheOddsApiSercice $oddsService)
+    public function __construct(TheOddsApiSercice $oddsService,TeamApiService $teamApi)
     {
+        $this->teamApi     = $teamApi;
         $this->oddsService = $oddsService;
     }
     /**
@@ -32,7 +35,7 @@ class GameController extends Controller
 
         }
 
-        return view('game', ["matches" => $matches, "sports" => Sport::all(), "match" => $match, 'casinos' => $casinos]);
+        return view('game', ["matches" => $matches, "sports" => Sport::all(), "match" => $match, 'casinos' => $casinos,"teamApi"=>  $this->teamApi]);
     }
 
     /**
@@ -73,7 +76,7 @@ class GameController extends Controller
             $match   = ($matches[$game]);
 
         }
-        return view('game', ["matches" => $matches, "match" => $match, "sports" => Sport::all(), 'casinos' => $casinos]);
+        return view('game', ["matches" => $matches, "match" => $match, "sports" => Sport::all(), 'casinos' => $casinos,"teamApi"=>  $this->teamApi]);
     }
 
     /**

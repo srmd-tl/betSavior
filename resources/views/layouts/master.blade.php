@@ -103,12 +103,12 @@
 											<div class="pad15">
 												<table>
 													<tr>
-														<td><img src="img/team1.png" align="left" style="width:30px;"></td>
+														<td><img src="{{$teamApi->team($match['teams'][0])['teams'][0]['strTeamLogo']}}" align="left" style="width:30px;"></td>
 														<td style="font-size:11px;"><strong>{{$match["teams"][0]}} &nbsp;</strong></td>
 														<td style="font-size:11px;">19-46</td>
 													</tr>
 													<tr>	
-														<td>&nbsp;&nbsp;&nbsp; <img src="img/team2.png" align="left" style="width:30px;"></td>
+														<td>&nbsp;&nbsp;&nbsp; <img src="{{$teamApi->team($match['teams'][1])['teams'][0]['strTeamLogo']}}" align="left" style="width:30px;"></td>
 														<td style="font-size:11px;"><strong>{{$match["teams"][1]}}  &nbsp;</strong></td>
 														<td style="font-size:11px;">20-47</td>
 													</tr>

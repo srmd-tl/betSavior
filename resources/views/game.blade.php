@@ -105,7 +105,6 @@
 								else
 								{
 									$teamBOdd=($league["odds"]["h2h"][1]-1)*100;
-									dd($league["odds"]["h2h"][0]);
 								$teamAOdd=100/(1-$league["odds"]["h2h"][0]);
 								}
 								$teamAOdd= round($teamAOdd);

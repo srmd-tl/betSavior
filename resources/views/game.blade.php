@@ -63,14 +63,19 @@
 							<label style="font-size:14px; font-weight:bold;"><input type="checkbox" style="margin-right:10px;font-size:12px;"value="">Best Odds</label></div>
 						</td>
 						<td style="border-left:0px solid #ffffff;">&nbsp;</td>
+						@forelse($match["sites"] as $league)
+						<td><img src="{{$casinos[$league['site_nice']]??null}}" alt="No Logo" width="80" ></td>
+
+						@empty
+						@endforelse
+						<!-- <td><img src="img/featured1.jpg" width="80" ></td>
 						<td><img src="img/featured1.jpg" width="80" ></td>
 						<td><img src="img/featured1.jpg" width="80" ></td>
 						<td><img src="img/featured1.jpg" width="80" ></td>
 						<td><img src="img/featured1.jpg" width="80" ></td>
 						<td><img src="img/featured1.jpg" width="80" ></td>
 						<td><img src="img/featured1.jpg" width="80" ></td>
-						<td><img src="img/featured1.jpg" width="80" ></td>
-						<td><img src="img/featured1.jpg" width="80" ></td>
+						<td><img src="img/featured1.jpg" width="80" ></td> -->
 					</tr>
 				</tbody>
 				<thead>
@@ -100,11 +105,14 @@
 								else
 								{
 									$teamBOdd=($league["odds"]["h2h"][1]-1)*100;
-
+									dd($league["odds"]["h2h"][0]);
 								$teamAOdd=100/(1-$league["odds"]["h2h"][0]);
 								}
+								$teamAOdd= round($teamAOdd);
+								$teamBOdd= round($teamBOdd);
 							@endphp
-							{{$teamAOdd}}
+						{{$teamAOdd>0?"+".$teamAOdd:$teamAOdd}}
+
 
 
 					</a></td>
@@ -118,7 +126,30 @@
 						<td style="width:15%;background:#ffffff;border-right:0px solid #ffffff;"><H6>{{$match["teams"][1]}}</H6></td>
 						<td style="background:#ffffff;border-left:0px solid #ffffff;"><a style="color:#212529;" href="#">-334</a> <img src="img/chart.png" width="20" style="margin-left:10px;"> </td>
 						@forelse($match["sites"] as $league)
-						<td style="text-align:center;font-weight:bold;color:#004ad6;"><a style="color:#004ad6;" href="#">{{$teamBOdd}}</a></td>
+						<td style="text-align:center;font-weight:bold;color:#004ad6;"><a style="color:#004ad6;" href="#">
+
+							@php
+								$teamAOdd=0;
+
+								$teamBOdd=0;
+								if($league["odds"]["h2h"][0]>$league["odds"]["h2h"][1])
+								{
+									$teamAOdd=($league["odds"]["h2h"][0]-1)*100;
+
+									$teamBOdd=100/(1-$league["odds"]["h2h"][1]);
+								}	
+								else
+								{
+									$teamBOdd=($league["odds"]["h2h"][1]-1)*100;
+
+								$teamAOdd=100/(1-$league["odds"]["h2h"][0]);
+								}
+								$teamAOdd= round($teamAOdd);
+								$teamBOdd= round($teamBOdd);
+							@endphp
+						{{$teamBOdd>0?"+".$teamBOdd:$teamBOdd}}
+
+					</a></td>
 						@empty
 						@endforelse
 						

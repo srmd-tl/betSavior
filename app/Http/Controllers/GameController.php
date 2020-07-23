@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Casino;
 use App\Game;
-use App\Sport;
 use App\Services\TheOddsApiSercice;
+use App\Sport;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
@@ -21,7 +22,8 @@ class GameController extends Controller
      */
     public function index(Request $request)
     {
-        $odds    = $this->oddsService->odds($request->sport??"basketball_nba");
+        $odds    = $this->oddsService->odds($request->sport ?? "basketball_nba");
+        $casinos = Casino::pluck('path', 'nice');
         $matches = [];
         if ($odds->json()) {
             $matches = collect($odds->json()["data"]);
@@ -30,7 +32,7 @@ class GameController extends Controller
 
         }
 
-        return view('game', ["matches" => $matches,"sports"=>Sport::all(),"match" => $match]);
+        return view('game', ["matches" => $matches, "sports" => Sport::all(), "match" => $match, 'casinos' => $casinos]);
     }
 
     /**
@@ -62,14 +64,16 @@ class GameController extends Controller
      */
     public function show(Request $request, $game)
     {
-        $odds  = $this->oddsService->odds($request->sport);
+        $odds    = $this->oddsService->odds($request->sport);
+        $casinos = Casino::pluck('path', 'nice');
+
         $match = [];
         if ($odds->json()) {
             $matches = collect($odds->json()["data"]);
             $match   = ($matches[$game]);
 
         }
-        return view('game', ["matches" => $matches, "match" => $match,"sports"=>Sport::all()]);
+        return view('game', ["matches" => $matches, "match" => $match, "sports" => Sport::all(), 'casinos' => $casinos]);
     }
 
     /**

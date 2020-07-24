@@ -46,7 +46,6 @@ class HomeController extends Controller
         if ($data["totalResults"] > 0) {
             $news = $data["articles"];
         }
-    
         return view('index', ["news" => $news, "matches" => $matches, "sports" => Sport::all(), "match" => $match,"teamApi"=>  $this->teamApi]);
     }
     public function fetchOdds()

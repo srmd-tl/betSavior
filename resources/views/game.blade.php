@@ -64,7 +64,7 @@
 						</td>
 						<td style="border-left:0px solid #ffffff;">&nbsp;</td>
 						@forelse($match["sites"] as $league)
-						<td><img src="{{$casinos[$league['site_nice']]??null}}" alt="No Logo" width="80" ></td>
+						<td><img src="{{$casinos[$league['site_nice']]??null}}" alt="{{$league['site_nice']}}" width="80" ></td>
 
 						@empty
 						@endforelse
@@ -91,7 +91,6 @@
 						<td style="width:15%;background:#ffffff;border-right:0px solid #ffffff;"><H6>{{$match["teams"][0]}}</H6></td>
 						<td style="background:#ffffff;border-left:0px solid #ffffff;"><a style="color:#212529;" href="#">-334</a> <img src="img/chart.png" width="20" style="margin-left:10px;"> </td>
 						@forelse($match["sites"] as $league)
-						<td style="text-align:center;font-weight:bold;color:#004ad6;"><a style="color:#004ad6;" href="#">
 							@php
 								$teamAOdd=0;
 
@@ -100,21 +99,46 @@
 								{
 									$teamAOdd=($league["odds"]["h2h"][0]-1)*100;
 
-									$teamBOdd=100/(1-$league["odds"]["h2h"][1]);
+									if($league["odds"]["h2h"][1]==0||$league["odds"]["h2h"][1]==1)
+									{
+										$teamBOdd="out";
+									}
+									else
+									{
+										$teamBOdd=100/(1-$league["odds"]["h2h"][1]);
+
+									}
 								}	
 								else
 								{
 									$teamBOdd=($league["odds"]["h2h"][1]-1)*100;
-								$teamAOdd=100/(1-$league["odds"]["h2h"][0]);
+									if($league["odds"]["h2h"][0]>=0)
+									{
+										$teamAOdd="out";
+									}
+									else
+									{
+										$teamAOdd=100/(1-$league["odds"]["h2h"][0]);
+
+									}
 								}
-								$teamAOdd= round($teamAOdd);
-								$teamBOdd= round($teamBOdd);
+								if($teamAOdd!="out")
+								{
+									$teamAOdd= round($teamAOdd);
+									$teamBOdd= round($teamBOdd);
+								}
+
 							@endphp
+						@if($teamAOdd!="out")
+						
+						<td style="text-align:center;font-weight:bold;color:#004ad6;"><a style="color:#004ad6;" href="#">
+							
 						{{$teamAOdd>0?"+".$teamAOdd:$teamAOdd}}
 
 
 
 					</a></td>
+					@endif
 						@empty
 						@endforelse
 						
@@ -125,7 +149,6 @@
 						<td style="width:15%;background:#ffffff;border-right:0px solid #ffffff;"><H6>{{$match["teams"][1]}}</H6></td>
 						<td style="background:#ffffff;border-left:0px solid #ffffff;"><a style="color:#212529;" href="#">-334</a> <img src="img/chart.png" width="20" style="margin-left:10px;"> </td>
 						@forelse($match["sites"] as $league)
-						<td style="text-align:center;font-weight:bold;color:#004ad6;"><a style="color:#004ad6;" href="#">
 
 							@php
 								$teamAOdd=0;
@@ -135,18 +158,41 @@
 								{
 									$teamAOdd=($league["odds"]["h2h"][0]-1)*100;
 
-									$teamBOdd=100/(1-$league["odds"]["h2h"][1]);
+									if($league["odds"]["h2h"][1]==0||$league["odds"]["h2h"][1]==1)
+									{
+										$teamBOdd="out";
+									}
+									else
+									{
+										$teamBOdd=100/(1-$league["odds"]["h2h"][1]);
+
+									}
 								}	
 								else
 								{
 									$teamBOdd=($league["odds"]["h2h"][1]-1)*100;
+									if($league["odds"]["h2h"][0]>=0)
+									{
+										$teamAOdd="out";
+									}
+									else
+									{
+										$teamAOdd=100/(1-$league["odds"]["h2h"][0]);
 
-								$teamAOdd=100/(1-$league["odds"]["h2h"][0]);
+									}
 								}
-								$teamAOdd= round($teamAOdd);
-								$teamBOdd= round($teamBOdd);
+								if($teamAOdd!="out")
+								{
+									$teamAOdd= round($teamAOdd);
+									$teamBOdd= round($teamBOdd);
+								}
+
 							@endphp
+						@if($teamBOdd!="out")
+						<td style="text-align:center;font-weight:bold;color:#004ad6;"><a style="color:#004ad6;" href="#">
+
 						{{$teamBOdd>0?"+".$teamBOdd:$teamBOdd}}
+						@endif
 
 					</a></td>
 						@empty

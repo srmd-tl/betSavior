@@ -31,10 +31,8 @@ class GameController extends Controller
         if ($odds->json()) {
             $matches = collect($odds->json()["data"]);
             $match   = ($matches[0]);
-            // dd($matches);
 
         }
-
         return view('game', ["matches" => $matches, "sports" => Sport::all(), "match" => $match, 'casinos' => $casinos,"teamApi"=>  $this->teamApi]);
     }
 

@@ -81,7 +81,7 @@
 				<thead>
 					<tr>
 						<th style="border-right:0px solid #ffffff;"><span style="font-weight:400;color:#6d6d6d;">Winner</span></th>
-						<th colspan="9" style="border-left:0px solid #ffffff;"><span style="font-size:14px;font-weight:300; ">Open Line</span></th>
+						<th colspan="9" style="border-left:0px solid #ffffff;"><span style="font-size:14px;font-weight:300; "></span></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -89,10 +89,11 @@
 					<tr STYLE="BACKGROUND:#F8F8F8;">
 
 						<td style="width:15%;background:#ffffff;border-right:0px solid #ffffff;"><H6>{{$match["teams"][0]}}</H6></td>
-						<td style="background:#ffffff;border-left:0px solid #ffffff;"><a style="color:#212529;" href="#">-334</a> <img src="img/chart.png" width="20" style="margin-left:10px;"> </td>
+						<td style="background:#ffffff;border-left:0px solid #ffffff;"><a style="color:#212529;" href="#"></a> <img src="img/chart.png" width="20" style="margin-left:10px;"> </td>
 						@forelse($match["sites"] as $league)
 							@php
 								$teamAOdd=0;
+								$oldValue=0;
 
 								$teamBOdd=0;
 								if($league["odds"]["h2h"][0]>$league["odds"]["h2h"][1])
@@ -119,7 +120,7 @@
 
 							@endphp
 						
-						<td style="text-align:center;font-weight:bold;color:#004ad6;"><a style="color:#004ad6;" href="#">
+						<td style="text-align:center;font-weight:bold;color:#004ad6;"  ><a style="color:#004ad6;" href="#">
 							
 						{{$teamAOdd>0?"+".$teamAOdd:$teamAOdd}}
 
@@ -134,11 +135,12 @@
 					<tr STYLE="BACKGROUND:#F8F8F8;">
 
 						<td style="width:15%;background:#ffffff;border-right:0px solid #ffffff;"><H6>{{$match["teams"][1]}}</H6></td>
-						<td style="background:#ffffff;border-left:0px solid #ffffff;"><a style="color:#212529;" href="#">-334</a> <img src="img/chart.png" width="20" style="margin-left:10px;"> </td>
+						<td style="background:#ffffff;border-left:0px solid #ffffff;"><a style="color:#212529;" href="#"></a> <img src="img/chart.png" width="20" style="margin-left:10px;"> </td>
 						@forelse($match["sites"] as $league)
 
 							@php
 								$teamAOdd=0;
+								$oldValue=0;
 
 								$teamBOdd=0;
 								if($league["odds"]["h2h"][0]>$league["odds"]["h2h"][1])

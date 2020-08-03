@@ -7,14 +7,14 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{asset('betSavior/css/bootstrap.min.css')}}" >
-	<link rel="stylesheet" href="{{asset('betSavior/css/animate.cs')}}s">
+	<link rel="stylesheet" href="{{asset('betSavior/css/animate.css')}}">
 	
-	<link rel="stylesheet" href="{{asset('betSavior/css/aos.cs')}}s">
-	<link rel="stylesheet" href="{{asset('betSavior/css/all.min.cs')}}s">
-	<link rel="stylesheet" href="{{asset('betSavior/css/fontawesome.min.cs')}}s">
+	<link rel="stylesheet" href="{{asset('betSavior/css/aos.css')}}">
+	<link rel="stylesheet" href="{{asset('betSavior/css/all.min.css')}}">
+	<link rel="stylesheet" href="{{asset('betSavior/css/fontawesome.min.css')}}">
     
-    <link rel="stylesheet" href="{{asset('betSavior/css/flaticon.cs')}}s">
-    <link rel="stylesheet" href="{{asset('betSavior/css/icomoon.cs')}}s">
+    <link rel="stylesheet" href="{{asset('betSavior/css/flaticon.css')}}">
+    <link rel="stylesheet" href="{{asset('betSavior/css/icomoon.css')}}">
 	
 	<link rel="stylesheet" href="{{asset('betSavior/css/styles.css')}}" >
 	
@@ -83,13 +83,15 @@
 					<div class="row no-gutters d-flex align-items-center align-items-stretch">
 						<div class="col-md-3 d-flex align-items-center">
 							<a href="index.html"><img src="img/logo.png"></a>
-								<select class="form-control sports" id="exampleFormControlSelect1" style="font-size: 0.7rem;width: 40%;">
-									<option>All Sports</option>
-									@forelse($sports as $sport)
+					
+							<select class="form-control sports"  style="font-size: 0.7rem;width: 40%;">
+								<option>Choose a different game</option>
+								@forelse($sports as $sport)
 								<option value="{{ $sport->sport_key}}" >{{ $sport->sport_nice}}</option>
 								@empty
 								@endforelse
-								</select>
+								
+							</select>	
 						</div>
 						<div class="col-lg-9 d-block">
 							<div class="row d-flex">
@@ -125,6 +127,7 @@
 										</div>
 										@empty
 										@endforelse
+									
 									</div>
 									<button class="btn btn-primary leftLst"><</button>
 									<button class="btn btn-primary rightLst">></button>
@@ -164,8 +167,8 @@
 			</nav>
 			<!-- End Navigation -->	 	 
 		</div>
-		@yield('content')
-					
+		<!-- Containter Fluid -->
+					@yield('content')
 					
 					<!-- end news -->
 			<!-- Featured Boxes --> 
@@ -422,7 +425,7 @@
 						<div class="collapse navbar-collapse" id="navbarNav">
 							<ul class="navbar-nav">
 								<li class="nav-item">
-									<a class="nav-link" href="#">About</span></a>
+									<a class="nav-link" href="#">About</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" href="#">Advertise With Us</a>
@@ -484,7 +487,7 @@ function myFunction() {
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-        <script type="text/javascript">
+    <script type="text/javascript">
 	$(function(){
 		$(".sports").change(function(){
 			var url = "{{route('game.index',':slug')}}"
@@ -494,5 +497,7 @@ function myFunction() {
 		})
 	})
 </script>
+
+    @stack('js')
   </body>
 </html>

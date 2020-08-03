@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\NewsApiService;
 use App\Services\TeamApiService;
 use App\Services\TheOddsApiSercice;
+use App\Services\XmlTeamScoreApiService;
 use App\Sport;
 use Illuminate\Support\Facades\Http;
 
@@ -13,17 +14,19 @@ class HomeController extends Controller
     protected $newsApi;
     protected $teamApi;
     protected $oddsService;
+    protected $xmlTeamScoreApiService;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(NewsApiService $newsApi, TheOddsApiSercice $oddsService, TeamApiService $teamApi)
+    public function __construct(NewsApiService $newsApi, TheOddsApiSercice $oddsService, TeamApiService $teamApi, XmlTeamScoreApiService $xmlTeamScoreApiService)
     {
         $this->middleware('auth');
-        $this->newsApi     = $newsApi;
-        $this->teamApi     = $teamApi;
-        $this->oddsService = $oddsService;
+        $this->newsApi                = $newsApi;
+        $this->teamApi                = $teamApi;
+        $this->oddsService            = $oddsService;
+        $this->xmlTeamScoreApiService = $xmlTeamScoreApiService;
     }
 
     /**
@@ -33,6 +36,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+       
+
         $news    = [];
         $odds    = $this->oddsService->odds($request->sport ?? "basketball_nba");
         $matches = [];
@@ -46,7 +51,7 @@ class HomeController extends Controller
         if ($data["totalResults"] > 0) {
             $news = $data["articles"];
         }
-        return view('index', ["news" => $news, "matches" => $matches, "sports" => Sport::all(), "match" => $match,"teamApi"=>  $this->teamApi]);
+        return view('index', ["news" => $news, "matches" => $matches, "sports" => Sport::all(), "match" => $match, "teamApi" => $this->teamApi]);
     }
     public function fetchOdds()
     {

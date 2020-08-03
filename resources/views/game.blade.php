@@ -224,7 +224,9 @@
                            </div>
                         </li>
                         @forelse($match["sites"] as $league)
+                        @if($loop->iteration<=8)
                         <li><img src="{{$casinos[$league['site_nice']]??null}}" alt="{{$league['site_nice']}}" ></li>
+                        @endif
                         	@empty
 						@endforelse
          
@@ -270,8 +272,9 @@
 								
 
 							@endphp
+					 	@if($loop->iteration<=8)
                         <li> <a href="#"><span class="com-img"><img src="img/betmgm.png" alt="betmgm"></span>{{$teamAOdd>0?"+".$teamAOdd:$teamAOdd}}</a></li>
-                 
+                 		@endif
                         @empty
                         @endforelse
                      </ul>
@@ -309,8 +312,10 @@
 								
 
 							@endphp
+						@if($loop->iteration<=8)
                         <li> <a href="#"><span class="com-img"><img src="img/betmgm.png" alt="betmgm"></span>{{$teamBOdd>0?"+".$teamBOdd:$teamBOdd}}</a></li>
-                 	   @empty
+                 	   	@endif
+                 	   	@empty
                         @endforelse
                      </ul>
                    

@@ -240,7 +240,7 @@
                      <ul class="compare-value">
                         <li> <span class="win-hd">{{$match["teams"][0]}}</span>	<a>-334</a>
                            <span class="trand-img">
-                           <img src="img/trading.png" alt="trading"></span> 
+                           <img src="{{asset('betSavior/img/trading.png')}}" alt="trading"></span> 
                         </li>
 
                         	@forelse($match["sites"] as $league)
@@ -281,7 +281,7 @@
                      <ul class="compare-value">
                         <li> <span class="win-hd">{{$match["teams"][1]}}	</span>	<a>+474</a>
                            <span class="trand-img">
-                           <img src="img/trading.png" alt="trading"></span> 
+                           <img src="{{asset('betSavior/img/trading.png')}}" alt="trading"></span> 
                         </li>
                         	@forelse($match["sites"] as $league)
 							@php

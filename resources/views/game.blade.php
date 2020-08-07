@@ -243,7 +243,7 @@
                            <img src="{{asset('betSavior/img/trading.png')}}" alt="trading"></span> 
                         </li>
 
-                        	@forelse($match["sites"] as $league)
+                  	@forelse($match["sites"] as $league)
 							@php
 								$teamAOdd=0;
 								$oldValue=0;
@@ -273,7 +273,7 @@
 
 							@endphp
 					 	@if($loop->iteration<=8)
-                        <li> <a href="#"><span class="com-img"><img src="img/betmgm.png" alt="betmgm"></span>{{$teamAOdd>0?"+".$teamAOdd:$teamAOdd}}</a></li>
+                        <li> <a href="#"><span class="com-img"><img src="{{asset('betSavior/img/betmgm.png')}}" alt="betmgm"></span>{{$teamAOdd>0?"+".$teamAOdd:$teamAOdd}}</a></li>
                  		@endif
                         @empty
                         @endforelse
@@ -313,7 +313,7 @@
 
 							@endphp
 						@if($loop->iteration<=8)
-                        <li> <a href="#"><span class="com-img"><img src="img/betmgm.png" alt="betmgm"></span>{{$teamBOdd>0?"+".$teamBOdd:$teamBOdd}}</a></li>
+                        <li> <a href="#"><span class="com-img"><img src="{{asset('betSavior/img/betmgm.png')}}" alt="betmgm"></span>{{$teamBOdd>0?"+".$teamBOdd:$teamBOdd}}</a></li>
                  	   	@endif
                  	   	@empty
                         @endforelse

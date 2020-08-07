@@ -448,9 +448,10 @@
 						<div class="col-md-6">
 							<div class="social-part">
 								<span style="font-size:14px; float:right;">Follow Us: 
-									<a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-									<a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-									<a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+									@foreach($socialMedias as $socialMedia)
+									{!! $socialMedia->logo !!}
+									@endforeach
+						
 								</span>
 							</div>
 						</div>

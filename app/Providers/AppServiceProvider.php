@@ -23,6 +23,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Using view composer to set following variables globally
+        view()->composer('*', function ($view) {
+            $view->with('socialMedias', \App\SocialMedia::all());
+   
+     
+        });
     }
 }

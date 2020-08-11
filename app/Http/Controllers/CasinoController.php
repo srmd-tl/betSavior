@@ -14,7 +14,8 @@ class CasinoController extends Controller
      */
     public function index()
     {
-        //
+    	$casinos = Casino::orderBy('id', 'desc')->get();
+        return view('admin.casinos.index', compact('casinos'));
     }
 
     /**
@@ -35,7 +36,12 @@ class CasinoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $casino = Casino::create(['nice' => $request->nice, 'path' => $request->path]);
+        if($casino){
+	        return redirect()->route('')->with('success','New Casino added successfully');
+        }
+	    return redirect()->route('')->withErrors('New casino was not added to the database');
+
     }
 
     /**
@@ -65,11 +71,16 @@ class CasinoController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Casino  $casino
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Casino $casino)
     {
-        //
+	    $casino = $casino->update(['nice' => $request->nice, 'path' => $request->path]);
+	    if($casino){
+		    return redirect()->route('casino.index')->with('success','Casino data updated successfully');
+	    }
+	    return redirect()->back()->withErrors('cannot update casino data');
+
     }
 
     /**
@@ -80,6 +91,6 @@ class CasinoController extends Controller
      */
     public function destroy(Casino $casino)
     {
-        //
+
     }
 }

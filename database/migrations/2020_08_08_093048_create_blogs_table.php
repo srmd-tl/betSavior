@@ -15,13 +15,15 @@ class CreateBlogsTable extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+//            $table->foreignId('user_id');
+//	        $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->longText('description');
             $table->timestamps();
 
             /*Foregin Key*/
-            $table->foreign('user_id')->reference('id')->on('users');
+//            $table->foreign('user_id')->reference('id')->on('users');
+            $table->foreignId('user_id')->constrained('users');
         });
     }
 

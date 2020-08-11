@@ -32,5 +32,6 @@ Route::get('fetchOdds', 'HomeController@fetchOdds');
 Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::resource('socialMedia', 'SocialMediaController');
     Route::resource('blog', 'BlogController');
-
+	Route::resource('casino', 'CasinoController');
 });
+

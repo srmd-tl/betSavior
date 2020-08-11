@@ -6,11 +6,10 @@
 				<div class="card-header border-0">
 					<div class="row align-items-center">
 						<div class="col-8">
-							<h3 class="mb-0">Socail Media</h3>
+							<h3 class="mb-0">Casinos</h3>
 						</div>
 						<div class="col-4 text-right">
-							<button id="addSocialMedia" class="btn btn-sm btn-primary">Add Social Media</button>
-
+							<button id="addCasino" class="btn btn-sm btn-primary">Add Casino</button>
 						</div>
 					</div>
 				</div>
@@ -27,13 +26,12 @@
 						</tr>
 						</thead>
 						<tbody>
-						@foreach($socialMedias as $socialMedia)
+						@foreach($casinos as $casino)
 							<tr>
-								<td>{{$socialMedia->name}}</td>
-								<td>
-									<img src="{{$socialMedia->logo}}">
-								</td>
-								<td>{{$socialMedia->created_at}}</td>
+								<td>{{$casino->nice}}</td>
+								<td><img width="50" height="50" src="{{$casino->path}}" /> </td>
+
+								<td>{{$casino->created_at}}</td>
 								<td class="text-right">
 									<div class="dropdown">
 										<a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
@@ -41,9 +39,9 @@
 											<i class="fas fa-ellipsis-v"></i>
 										</a>
 										<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-											<button class="dropdown-item editSocialMedia" data-id="{{$socialMedia->id}}"
-											        data-logo="{{$socialMedia->logo}}"
-											        data-name="{{$socialMedia->name}}">Edit
+											<button class="dropdown-item editCasino" data-id="{{$casino->id}}"
+											        data-nice="{{$casino->nice}}"
+											        data-path="{{$casino->path}}">Edit
 											</button>
 										</div>
 									</div>
@@ -60,7 +58,9 @@
 			</div>
 		</div>
 	</div>
-	<!-- Create New Social Media Modal -->
+
+
+	<!-- Create New Casino Modal -->
 	<div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
 		<div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
 			<div class="modal-content">
@@ -70,16 +70,16 @@
 
 							<div class="card-body px-lg-5 py-lg-5">
 								<div class="text-muted text-center mt-2 mb-3">
-									<small>Add new social media icon</small>
+									<small>Add new Casino</small>
 								</div>
-								<form role="form" method="POST" action="{{route('socialMedia.store')}}">
+								<form role="form" method="POST" action="{{route('casino.store')}}">
 									@csrf
 									<div class="form-group mb-3">
 										<div class="input-group input-group-merge input-group-alternative">
 											<div class="input-group-prepend">
 												<span class="input-group-text"><i class="ni ni-email-83"></i></span>
 											</div>
-											<input class="form-control" placeholder="Name" type="string" name="name">
+											<input class="form-control" placeholder="nice" type="string" name="nice">
 										</div>
 									</div>
 									<div class="form-group">
@@ -87,7 +87,7 @@
 											<div class="input-group-prepend">
 												<span class="input-group-text"><i class="ni ni-email-83"></i></span>
 											</div>
-											<input class="form-control" type="string" name="logo"
+											<input class="form-control" type="string" name="path"
 											       placeholder='<a href="#"><i class="fab fa-tumbler" aria-hidden="true"></i></a>'
 											       tooltip='<a href="#"><i class="fab fa-tumbler" aria-hidden="true"></i></a>'>
 										</div>
@@ -104,11 +104,10 @@
 			</div>
 		</div>
 	</div>
+	<!-- End Create New Casino Modal -->
 
-	<!-- End Create New Social Media Modal -->
 
-
-	<!-- Edit  Social Media Modal -->
+	<!-- Edit  Casino Modal -->
 	<div class="modal fade" id="edit-modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form"
 	     aria-hidden="true">
 		<div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
@@ -119,7 +118,7 @@
 
 							<div class="card-body px-lg-5 py-lg-5">
 								<div class="text-muted text-center mt-2 mb-3">
-									<small>Edit social media icon</small>
+									<small>Edit casino data</small>
 								</div>
 								<form role="form" method="POST" id="editForm">
 									@csrf
@@ -129,8 +128,8 @@
 											<div class="input-group-prepend">
 												<span class="input-group-text"><i class="ni ni-email-83"></i></span>
 											</div>
-											<input class="form-control" placeholder="Name" type="string" name="name"
-											       id="editName">
+											<input class="form-control" placeholder="nice" type="string" name="nice"
+											       id="editNice">
 										</div>
 									</div>
 									<div class="form-group">
@@ -138,7 +137,7 @@
 											<div class="input-group-prepend">
 												<span class="input-group-text"><i class="ni ni-email-83"></i></span>
 											</div>
-											<input class="form-control" id="editLogo" type="string" name="logo"
+											<input class="form-control" id="editPath" type="string" name="path"
 											       placeholder='<a href="#"><i class="fab fa-tumbler" aria-hidden="true"></i></a>'
 											       tooltip='<a href="#"><i class="fab fa-tumbler" aria-hidden="true"></i></a>'>
 										</div>
@@ -155,7 +154,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- End Edit  Social Media Modal -->
+	<!-- End Edit  casino Modal -->
 @endsection
 
 
@@ -164,20 +163,21 @@
 <script type="text/javascript">
     $(function () {
 		/*To Open Create MOdal*/
-        $("#addSocialMedia").click(function () {
+        $("#addCasino").click(function () {
             $("#modal-form").modal();
         })
+
 		/*To Open Edit MOdal*/
-        $(".editSocialMedia").click(function () {
+        $(".editCasino").click(function () {
 			/*Get Values*/
             var id = $(this).data("id")
-            var name = $(this).data("name")
-            var logo = $(this).data("logo")
+            var nice = $(this).data("nice")
+            var path = $(this).data("path")
 
 			/*Set values*/
-            $("#editLogo").val(logo)
-            $("#editName").val(name)
-            var url = "{{route('socialMedia.update',':id')}}"
+            $("#editNice").val(nice)
+            $("#editPath").val(path)
+            var url = "{{route('casino.update',':id')}}"
             url = url.replace(":id", id)
             $("#editForm").attr('action', url)
 			/*Open Modal*/
@@ -188,6 +188,3 @@
     })
 </script>
 @endpush
-
-
-

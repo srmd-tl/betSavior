@@ -21,7 +21,7 @@ class CreateBlogsTable extends Migration
             $table->timestamps();
 
             /*Foregin Key*/
-            $table->foreign('user_id')->reference('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

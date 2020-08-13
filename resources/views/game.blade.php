@@ -322,7 +322,7 @@
                   </div>
                </div>
                <div id="Spread" class="tab-pane fade">
-                  
+
                   
                   <div class="row filter-rw">
                      <div class="col-md-3" >
@@ -398,7 +398,7 @@
 
                      @endphp
                   @if($loop->iteration<=8)
-                        <li> <a href="#"><span class="com-img"><img src="{{asset('betSavior/img/betmgm.png')}}" alt="betmgm"></span>{{$teamAOddSpread>0?"+".$teamAOddSpread:$teamAOddSpread}}</a></li>
+                        <li> <a href="#"><span class="com-img"><img src="{{asset('betSavior/img/betmgm.png')}}" alt="betmgm"></span>{{$spreadLeague["odds"]["spreads"]["points"][0]}}        {{$spreadLeague["odds"]["spreads"]["points"][1]}}</a></li>
                      @endif
                         @empty
                         @endforelse
@@ -438,7 +438,7 @@
 
                      @endphp
                   @if($loop->iteration<=8)
-                        <li> <a href="#"><span class="com-img"><img src="{{asset('betSavior/img/betmgm.png')}}" alt="betmgm"></span>{{$teamBOddSpread>0?"+".$teamBOddSpread:$teamBOddSpread}}</a></li>
+                        <li> <a href="#"><span class="com-img"><img src="{{asset('betSavior/img/betmgm.png')}}" alt="betmgm"></span>{{$spreadLeague["odds"]["spreads"]["points"][1]}}        {{$spreadLeague["odds"]["spreads"]["odds"][1]}}</a></li>
                         @endif
                         @empty
                         @endforelse
@@ -447,6 +447,7 @@
                   </div>
                </div>
                <div id="Over" class="tab-pane fade">
+
                   
                   
                   <div class="row filter-rw">
@@ -523,7 +524,7 @@
 
                      @endphp
                   @if($loop->iteration<=8)
-                        <li> <a href="#"><span class="com-img"><img src="{{asset('betSavior/img/betmgm.png')}}" alt="betmgm"></span>{{$teamAOddTotal>0?"+".$teamAOddTotal:$teamAOddTotal}}</a></li>
+                        <li> <a href="#"><span class="com-img"><img src="{{asset('betSavior/img/betmgm.png')}}" alt="betmgm"></span>{{$totalLeague["odds"]["totals"]["points"][0]}}       {{$totalLeague["odds"]["totals"]["odds"][0]}}</a></li>
                      @endif
                         @empty
                         @endforelse
@@ -563,7 +564,7 @@
 
                      @endphp
                   @if($loop->iteration<=8)
-                        <li> <a href="#"><span class="com-img"><img src="{{asset('betSavior/img/betmgm.png')}}" alt="betmgm"></span>{{$teamBOddTotal>0?"+".$teamBOddTotal:$teamBOddTotal}}</a></li>
+                        <li> <a href="#"><span class="com-img"><img src="{{asset('betSavior/img/betmgm.png')}}" alt="betmgm"></span>{{$totalLeague["odds"]["totals"]["points"][1]}}       {{$totalLeague["odds"]["totals"]["odds"][1]}}</a></li>
                         @endif
                         @empty
                         @endforelse

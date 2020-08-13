@@ -84,28 +84,28 @@
                         <!-- games -->
                         <div class="MultiCarousel" data-items="1,4,5,5" data-slide="1" id="MultiCarousel"  data-interval="1000">
                            <div class="MultiCarousel-inner">
-                              @forelse($matches as $key=> $match)
+                              @forelse($matches as $key=> $singleMatch)
                               <div class="item" style="width:170px !important;">
                                  <div class="pad15">
                                     <table>
                                        <tr>
-                                          <td><img src="{{$teamApi->team($match['teams'][0])['teams'][0]['strTeamLogo']}}" align="left" style="width:30px;"></td>
-                                          <td style="font-size:11px;"><strong>{{$match["teams"][0]}} &nbsp;</strong></td>
+                                          <td><img src="{{$teamApi->team($singleMatch['teams'][0])['teams'][0]['strTeamLogo']}}" align="left" style="width:30px;"></td>
+                                          <td style="font-size:11px;"><strong>{{$singleMatch["teams"][0]}} &nbsp;</strong></td>
                                           <td style="font-size:11px;">19-46</td>
                                        </tr>
                                        <tr>
-                                          <td>&nbsp;&nbsp;&nbsp; <img src="{{$teamApi->team($match['teams'][1])['teams'][0]['strTeamLogo']}}" align="left" style="width:30px;"></td>
-                                          <td style="font-size:11px;"><strong>{{$match["teams"][1]}}  &nbsp;</strong></td>
+                                          <td>&nbsp;&nbsp;&nbsp; <img src="{{$teamApi->team($singleMatch['teams'][1])['teams'][0]['strTeamLogo']}}" align="left" style="width:30px;"></td>
+                                          <td style="font-size:11px;"><strong>{{$singleMatch["teams"][1]}}  &nbsp;</strong></td>
                                           <td style="font-size:11px;">20-47</td>
                                        </tr>
                                        <tr>
                                           <td colspan="3">&nbsp;&nbsp;&nbsp;<span style="font-size:10px;">{{
-                                             \Carbon\Carbon::parse(\Carbon\Carbon::createFromTimestamp($match["commence_time"])->toDateTimeString(), 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')
+                                             \Carbon\Carbon::parse(\Carbon\Carbon::createFromTimestamp($singleMatch["commence_time"])->toDateTimeString(), 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ss a')
                                              }}</span>
                                           </td>
                                        </tr>
                                        <tr>
-                                          <td colspan="3">&nbsp;<a href="{{route('game.show',[$key,'sport'=>$match['sport_key'] ])}}" class="btn btn-void" style="color:#004bd1;font-size:11px;">Go to Game >></a></td>
+                                          <td colspan="3">&nbsp;<a href="{{route('game.show',[$key,'sport'=>$singleMatch['sport_key'] ])}}" class="btn btn-void" style="color:#004bd1;font-size:11px;">Go to Game >></a></td>
                                        </tr>
                                     </table>
                                  </div>
@@ -322,12 +322,258 @@
                   </div>
                </div>
                <div id="Spread" class="tab-pane fade">
-                  <h3>Menu 1</h3>
-                  <p>Some content in menu 1.</p>
+                  
+                 
+                  
+                  
+                  <div class="row filter-rw">
+                     <div class="col-md-3" >
+                        <p>   &lt; LALIGA</p>
+                     </div>
+                     <div class="col-md-9" >
+                        <select class="form-control" id="exampleFormControlSelect1" style="font-size: 0.7rem;width: 40%;float:left;">
+                           <option>Choose a different game</option>
+                           <option>NFL</option>
+                           <option>NBA</option>
+                           <option>MLB</option>
+                           <option>NHL</option>
+                        </select>
+                        <button type="button" class="btn btn-primary" style="float:right;">FILTER BY: ALL STATES <i class="fas fa-angle-double-right"></i></button>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <ul class="compare-ods">
+                        <li>
+                           Compare odds
+                           <div class="checkbox">
+                              <label>
+                              <input type="checkbox"  value="">&nbsp; Best Odds</label>
+                           </div>
+                        </li>
+                        @forelse($totalsMatches["sites"] as $totalleague)
+                        @if($loop->iteration<=8)
+                        <li><img src="{{$casinos[$totalleague['site_nice']]??null}}" alt="{{$totalleague['site_nice']}}" ></li>
+                        @endif
+                           @empty
+                  @endforelse
+         
+                     </ul>
+                     <div class="clearfix"></div>
+                     <br>
+                     <ul class="compare-head">
+                        <li>Winner</li>
+                        <li>Open Line</li>
+                     </ul>
+                     <ul class="compare-value">
+                        <li> <span class="win-hd">{{$totalsMatches["teams"][0]}}</span>  <a>-334</a>
+                           <span class="trand-img">
+                           <img src="{{asset('betSavior/img/trading.png')}}" alt="trading"></span> 
+                        </li>
+
+                     @forelse($totalsMatches["sites"] as $totalleague)
+                     @php
+                        $teamAOddTotal=0;
+                        $oldValueTotal=0;
+
+                        $teamBOddTotal=0;
+                        if($totalleague["odds"]["totals"]["points"][0]>$totalleague["odds"]["totals"]["points"][1])
+                        {
+                           $teamAOddTotal=($totalleague["odds"]["totals"]["points"][0]-1)*100;
+
+                           
+                              $teamBOddTotal=100/(1-$totalleague["odds"]["totals"]["points"][1]);
+
+                           
+                        }  
+                        else
+                        {
+                           $teamBOddTotal=($totalleague["odds"]["totals"]["points"][1]-1)*100;
+                           
+                              $teamAOddTotal=100/(1-$totalleague["odds"]["totals"]["points"][0]);
+
+                           
+                        }
+                        
+                           $teamAOddTotal= round($teamAOddTotal);
+                           $teamBOddTotal= round($teamBOddTotal);
+                        
+
+                     @endphp
+                  @if($loop->iteration<=8)
+                        <li> <a href="#"><span class="com-img"><img src="{{asset('betSavior/img/betmgm.png')}}" alt="betmgm"></span>{{$teamAOddTotal>0?"+".$teamAOddTotal:$teamAOddTotal}}</a></li>
+                     @endif
+                        @empty
+                        @endforelse
+                     </ul>
+                     <ul class="compare-value">
+                        <li> <span class="win-hd">{{$totalsMatches["teams"][1]}}   </span>  <a>+474</a>
+                           <span class="trand-img">
+                           <img src="{{asset('betSavior/img/trading.png')}}" alt="trading"></span> 
+                        </li>
+                           @forelse($totalsMatches["sites"] as $totalleague)
+                     @php
+                        $teamAOddTotal=0;
+                        $oldValueTotal=0;
+
+                        $teamBOddTotal=0;
+                        dd($totalleague["odds"]["totals"]["points"][0]);
+                        if($totalleague["odds"]["totals"]["points"][0]>$totalleague["odds"]["totals"]["points"][1])
+                        {
+                           $teamAOddTotal=($totalleague["odds"]["totals"]["points"][0]-1)*100;
+
+                           
+                              $teamBOddTotal=100/(1-$totalleague["odds"]["totals"]["points"][1]);
+
+                           
+                        }  
+                        else
+                        {
+                           $teamBOddTotal=($totalleague["odds"]["totals"]["points"][1]-1)*100;
+                           
+                              $teamAOddTotal=100/(1-$totalleague["odds"]["totals"]["points"][0]);
+
+                           
+                        }
+                        
+                           $teamAOddTotal= round($teamAOddTotal);
+                           $teamBOddTotal= round($teamBOddTotal);
+                        
+
+                     @endphp
+                  @if($loop->iteration<=8)
+                        <li> <a href="#"><span class="com-img"><img src="{{asset('betSavior/img/betmgm.png')}}" alt="betmgm"></span>{{$teamBOddTotal>0?"+".$teamBOddTotal:$teamBOddTotal}}</a></li>
+                        @endif
+                        @empty
+                        @endforelse
+                     </ul>
+                   
+                  </div>
                </div>
                <div id="Over" class="tab-pane fade">
-                  <h3>Menu 2</h3>
-                  <p>Some content in menu 2.</p>
+                  
+                  
+                  <div class="row filter-rw">
+                     <div class="col-md-3" >
+                        <p>   &lt; LALIGA</p>
+                     </div>
+                     <div class="col-md-9" >
+                        <select class="form-control" id="exampleFormControlSelect1" style="font-size: 0.7rem;width: 40%;float:left;">
+                           <option>Choose a different game</option>
+                           <option>NFL</option>
+                           <option>NBA</option>
+                           <option>MLB</option>
+                           <option>NHL</option>
+                        </select>
+                        <button type="button" class="btn btn-primary" style="float:right;">FILTER BY: ALL STATES <i class="fas fa-angle-double-right"></i></button>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <ul class="compare-ods">
+                        <li>
+                           Compare odds
+                           <div class="checkbox">
+                              <label>
+                              <input type="checkbox"  value="">&nbsp; Best Odds</label>
+                           </div>
+                        </li>
+                        @forelse($totalsMatches["sites"] as $totalleague)
+                        @if($loop->iteration<=8)
+                        <li><img src="{{$casinos[$totalleague['site_nice']]??null}}" alt="{{$totalleague['site_nice']}}" ></li>
+                        @endif
+                           @empty
+                  @endforelse
+         
+                     </ul>
+                     <div class="clearfix"></div>
+                     <br>
+                     <ul class="compare-head">
+                        <li>Winner</li>
+                        <li>Open Line</li>
+                     </ul>
+                     <ul class="compare-value">
+                        <li> <span class="win-hd">{{$totalsMatches["teams"][0]}}</span>  <a>-334</a>
+                           <span class="trand-img">
+                           <img src="{{asset('betSavior/img/trading.png')}}" alt="trading"></span> 
+                        </li>
+
+                     @forelse($totalsMatches["sites"] as $totalleague)
+                     @php
+                        $teamAOddTotal=0;
+                        $oldValueTotal=0;
+
+                        $teamBOddTotal=0;
+                        if($totalleague["odds"]["totals"]["points"][0]>$totalleague["odds"]["totals"]["points"][1])
+                        {
+                           $teamAOddTotal=($totalleague["odds"]["totals"]["points"][0]-1)*100;
+
+                           
+                              $teamBOddTotal=100/(1-$totalleague["odds"]["totals"]["points"][1]);
+
+                           
+                        }  
+                        else
+                        {
+                           $teamBOddTotal=($totalleague["odds"]["totals"]["points"][1]-1)*100;
+                           
+                              $teamAOddTotal=100/(1-$totalleague["odds"]["totals"]["points"][0]);
+
+                           
+                        }
+                        
+                           $teamAOddTotal= round($teamAOddTotal);
+                           $teamBOddTotal= round($teamBOddTotal);
+                        
+
+                     @endphp
+                  @if($loop->iteration<=8)
+                        <li> <a href="#"><span class="com-img"><img src="{{asset('betSavior/img/betmgm.png')}}" alt="betmgm"></span>{{$teamAOddTotal>0?"+".$teamAOddTotal:$teamAOddTotal}}</a></li>
+                     @endif
+                        @empty
+                        @endforelse
+                     </ul>
+                     <ul class="compare-value">
+                        <li> <span class="win-hd">{{$totalsMatches["teams"][1]}}   </span>  <a>+474</a>
+                           <span class="trand-img">
+                           <img src="{{asset('betSavior/img/trading.png')}}" alt="trading"></span> 
+                        </li>
+                           @forelse($totalsMatches["sites"] as $totalleague)
+                     @php
+                        $teamAOddTotal=0;
+                        $oldValueTotal=0;
+
+                        $teamBOddTotal=0;
+                        dd($totalleague["odds"]["totals"]["points"][0]);
+                        if($totalleague["odds"]["totals"]["points"][0]>$totalleague["odds"]["totals"]["points"][1])
+                        {
+                           $teamAOddTotal=($totalleague["odds"]["totals"]["points"][0]-1)*100;
+
+                           
+                              $teamBOddTotal=100/(1-$totalleague["odds"]["totals"]["points"][1]);
+
+                           
+                        }  
+                        else
+                        {
+                           $teamBOddTotal=($totalleague["odds"]["totals"]["points"][1]-1)*100;
+                           
+                              $teamAOddTotal=100/(1-$totalleague["odds"]["totals"]["points"][0]);
+
+                           
+                        }
+                        
+                           $teamAOddTotal= round($teamAOddTotal);
+                           $teamBOddTotal= round($teamBOddTotal);
+                        
+
+                     @endphp
+                  @if($loop->iteration<=8)
+                        <li> <a href="#"><span class="com-img"><img src="{{asset('betSavior/img/betmgm.png')}}" alt="betmgm"></span>{{$teamBOddTotal>0?"+".$teamBOddTotal:$teamBOddTotal}}</a></li>
+                        @endif
+                        @empty
+                        @endforelse
+                     </ul>
+                   
+                  </div>
                </div>
                <div id="Props" class="tab-pane fade">
                   <h3>Menu 3</h3>

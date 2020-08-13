@@ -13,7 +13,7 @@ class GameController extends Controller
 {
     protected $teamApi;
     protected $oddsService;
-    public function __construct(TheOddsApiSercice $oddsService,TeamApiService $teamApi)
+    public function __construct(TheOddsApiSercice $oddsService, TeamApiService $teamApi)
     {
         $this->teamApi     = $teamApi;
         $this->oddsService = $oddsService;
@@ -33,7 +33,7 @@ class GameController extends Controller
             $match   = ($matches[0]);
 
         }
-        return view('game', ["matches" => $matches, "sports" => Sport::all(), "match" => $match, 'casinos' => $casinos,"teamApi"=>  $this->teamApi]);
+        return view('game', ["matches" => $matches, "sports" => Sport::all(), "match" => $match, 'casinos' => $casinos, "teamApi" => $this->teamApi]);
     }
 
     /**
@@ -66,6 +66,8 @@ class GameController extends Controller
     public function show(Request $request, $game)
     {
         $odds    = $this->oddsService->odds($request->sport);
+        $spreads = $this->oddsService->spreads($request->sport);
+        $totals  = $this->oddsService->totals($request->sport);
         $casinos = Casino::pluck('path', 'nice');
 
         $match = [];
@@ -74,7 +76,20 @@ class GameController extends Controller
             $match   = ($matches[$game]);
 
         }
-        return view('game', ["matches" => $matches, "match" => $match, "sports" => Sport::all(), 'casinos' => $casinos,"teamApi"=>  $this->teamApi]);
+        $spreadMatches = [];
+        if ($spreads->json()) {
+            $spreadses = collect($spreads->json()["data"]);
+            $spreadMatches   = ($spreadses[$game]);
+
+        }
+
+        $totalsMatches = [];
+        if ($totals->json()) {
+            $totalses = collect($totals->json()["data"]);
+            $totalsMatches   = ($totalses[$game]);
+
+        }
+        return view('game', ["matches" => $matches, "match" => $match, "sports" => Sport::all(), 'casinos' => $casinos, "teamApi" => $this->teamApi,"totalsMatches"=>$totalsMatches,"spreadMatches"=>$spreadMatches]);
     }
 
     /**

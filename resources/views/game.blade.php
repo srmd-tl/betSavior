@@ -322,6 +322,7 @@
                   </div>
                </div>
                <div id="Spread" class="tab-pane fade">
+                  
 
                   
                   <div class="row filter-rw">
@@ -374,20 +375,20 @@
                         $oldValueTotal=0;
 
                         $teamBOddSpread=0;
-                        if($spreadLeague["odds"]["spreads"]["points"][0]>$spreadLeague["odds"]["spreads"]["points"][1])
+                        if($spreadLeague["odds"]["spreads"]["odds"][0]>$spreadLeague["odds"]["spreads"]["odds"][1])
                         {
-                           $teamAOddSpread=($spreadLeague["odds"]["spreads"]["points"][0]-1)*100;
+                           $teamAOddSpread=($spreadLeague["odds"]["spreads"]["odds"][0]-1)*100;
 
                            
-                              $teamBOddSpread=100/(1-$spreadLeague["odds"]["spreads"]["points"][1]);
+                              $teamBOddSpread=100/(1-$spreadLeague["odds"]["spreads"]["odds"][1]);
 
                            
                         }  
                         else
                         {
-                           $teamBOddSpread=($spreadLeague["odds"]["spreads"]["points"][1]-1)*100;
+                           $teamBOddSpread=($spreadLeague["odds"]["spreads"]["odds"][1]-1)*100;
                            
-                              $teamAOddSpread=100/(1-$spreadLeague["odds"]["spreads"]["points"][0]);
+                              $teamAOddSpread=100/(1-$spreadLeague["odds"]["spreads"]["odds"][0]);
 
                            
                         }
@@ -398,7 +399,9 @@
 
                      @endphp
                   @if($loop->iteration<=8)
-                        <li> <a href="#"><span class="com-img"><img src="{{asset('betSavior/img/betmgm.png')}}" alt="betmgm"></span>{{$spreadLeague["odds"]["spreads"]["points"][0]}}        {{$spreadLeague["odds"]["spreads"]["points"][1]}}</a></li>
+                        <li> <a href="#"><span class="com-img"><img src="{{asset('betSavior/img/betmgm.png')}}" alt="betmgm"></span>{{$spreadLeague["odds"]["spreads"]["points"][0]>0?"+".$spreadLeague["odds"]["spreads"]["points"][0]:$spreadLeague["odds"]["spreads"]["points"][0]}}        {{$teamAOdd>0?"+".$teamAOdd:$teamAOdd}}
+
+                           </a></li>
                      @endif
                         @empty
                         @endforelse
@@ -414,20 +417,20 @@
                         $oldValueTotal=0;
 
                         $teamBOddSpread=0;
-                        if($spreadLeague["odds"]["spreads"]["points"][0]>$spreadLeague["odds"]["spreads"]["points"][1])
+                        if($spreadLeague["odds"]["spreads"]["odds"][0]>$spreadLeague["odds"]["spreads"]["odds"][1])
                         {
-                           $teamAOddSpread=($spreadLeague["odds"]["spreads"]["points"][0]-1)*100;
+                           $teamAOddSpread=($spreadLeague["odds"]["spreads"]["odds"][0]-1)*100;
 
                            
-                              $teamBOddSpread=100/(1-$spreadLeague["odds"]["spreads"]["points"][1]);
+                              $teamBOddSpread=100/(1-$spreadLeague["odds"]["spreads"]["odds"][1]);
 
                            
                         }  
                         else
                         {
-                           $teamBOddSpread=($spreadLeague["odds"]["spreads"]["points"][1]-1)*100;
+                           $teamBOddSpread=($spreadLeague["odds"]["spreads"]["odds"][1]-1)*100;
                            
-                              $teamAOddSpread=100/(1-$spreadLeague["odds"]["spreads"]["points"][0]);
+                              $teamAOddSpread=100/(1-$spreadLeague["odds"]["spreads"]["odds"][0]);
 
                            
                         }
@@ -438,7 +441,7 @@
 
                      @endphp
                   @if($loop->iteration<=8)
-                        <li> <a href="#"><span class="com-img"><img src="{{asset('betSavior/img/betmgm.png')}}" alt="betmgm"></span>{{$spreadLeague["odds"]["spreads"]["points"][1]}}        {{$spreadLeague["odds"]["spreads"]["odds"][1]}}</a></li>
+                        <li> <a href="#"><span class="com-img"><img src="{{asset('betSavior/img/betmgm.png')}}" alt="betmgm"></span>{{$spreadLeague["odds"]["spreads"]["odds"][1]>0?"+".$spreadLeague["odds"]["spreads"]["odds"][1]:$spreadLeague["odds"]["spreads"]["odds"][1]}}        {{$teamBOdd>0?"+".$teamBOdd:$teamBOdd}}</a></li>
                         @endif
                         @empty
                         @endforelse
@@ -448,6 +451,8 @@
                </div>
                <div id="Over" class="tab-pane fade">
 
+
+                  
                   
                   
                   <div class="row filter-rw">
@@ -500,20 +505,20 @@
                         $oldValueTotal=0;
 
                         $teamBOddTotal=0;
-                        if($totalLeague["odds"]["totals"]["points"][0]>$totalLeague["odds"]["totals"]["points"][1])
+                        if($totalLeague["odds"]["totals"]["odds"][0]>$totalLeague["odds"]["totals"]["odds"][1])
                         {
-                           $teamAOddTotal=($totalLeague["odds"]["totals"]["points"][0]-1)*100;
+                           $teamAOddTotal=($totalLeague["odds"]["totals"]["odds"][0]-1)*100;
 
                            
-                              $teamBOddTotal=100/(1-$totalLeague["odds"]["totals"]["points"][1]);
+                              $teamBOddTotal=100/(1-$totalLeague["odds"]["totals"]["odds"][1]);
 
                            
                         }  
                         else
                         {
-                           $teamBOddTotal=($totalLeague["odds"]["totals"]["points"][1]-1)*100;
+                           $teamBOddTotal=($totalLeague["odds"]["totals"]["odds"][1]-1)*100;
                            
-                              $teamAOddTotal=100/(1-$totalLeague["odds"]["totals"]["points"][0]);
+                              $teamAOddTotal=100/(1-$totalLeague["odds"]["totals"]["odds"][0]);
 
                            
                         }
@@ -524,7 +529,7 @@
 
                      @endphp
                   @if($loop->iteration<=8)
-                        <li> <a href="#"><span class="com-img"><img src="{{asset('betSavior/img/betmgm.png')}}" alt="betmgm"></span>{{$totalLeague["odds"]["totals"]["points"][0]}}       {{$totalLeague["odds"]["totals"]["odds"][0]}}</a></li>
+                        <li> <a href="#"><span class="com-img"><img src="{{asset('betSavior/img/betmgm.png')}}" alt="betmgm"></span>{{$totalLeague["odds"]["totals"]["points"][0]>0?"+".$totalLeague["odds"]["totals"]["points"][0]:$totalLeague["odds"]["totals"]["points"][0]}}        {{$teamAOdd>0?"+".$teamAOdd:$teamAOdd}}</a></li>
                      @endif
                         @empty
                         @endforelse
@@ -540,20 +545,20 @@
                         $oldValueTotal=0;
 
                         $teamBOddTotal=0;
-                        if($totalLeague["odds"]["totals"]["points"][0]>$totalLeague["odds"]["totals"]["points"][1])
+                        if($totalLeague["odds"]["totals"]["odds"][0]>$totalLeague["odds"]["totals"]["odds"][1])
                         {
-                           $teamAOddTotal=($totalLeague["odds"]["totals"]["points"][0]-1)*100;
+                           $teamAOddTotal=($totalLeague["odds"]["totals"]["odds"][0]-1)*100;
 
                            
-                              $teamBOddTotal=100/(1-$totalLeague["odds"]["totals"]["points"][1]);
+                              $teamBOddTotal=100/(1-$totalLeague["odds"]["totals"]["odds"][1]);
 
                            
                         }  
                         else
                         {
-                           $teamBOddTotal=($totalLeague["odds"]["totals"]["points"][1]-1)*100;
+                           $teamBOddTotal=($totalLeague["odds"]["totals"]["odds"][1]-1)*100;
                            
-                              $teamAOddTotal=100/(1-$totalLeague["odds"]["totals"]["points"][0]);
+                              $teamAOddTotal=100/(1-$totalLeague["odds"]["totals"]["odds"][0]);
 
                            
                         }
@@ -564,7 +569,7 @@
 
                      @endphp
                   @if($loop->iteration<=8)
-                        <li> <a href="#"><span class="com-img"><img src="{{asset('betSavior/img/betmgm.png')}}" alt="betmgm"></span>{{$totalLeague["odds"]["totals"]["points"][1]}}       {{$totalLeague["odds"]["totals"]["odds"][1]}}</a></li>
+                        <li> <a href="#"><span class="com-img"><img src="{{asset('betSavior/img/betmgm.png')}}" alt="betmgm"></span>{{$totalLeague["odds"]["totals"]["points"][1]>0?"+".$totalLeague["odds"]["totals"]["points"][1]:$totalLeague["odds"]["totals"]["points"][1]}}             {{$teamBOdd>0?"+".$teamBOdd:$teamBOdd}}</a></li>
                         @endif
                         @empty
                         @endforelse
